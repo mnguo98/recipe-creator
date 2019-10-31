@@ -1,0 +1,65 @@
+/*Navigation Bar*/
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+  
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    position: relative;
+    width: 19%;
+}
+  
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+  
+.topnav a.active {
+    background-color: #0000ff;
+    color: white;
+}
+
+/*Search Bar*/
+.searchbar {
+    text-align: center;
+}
+
+/*Title Bar*/
+.website {
+    background-color: #fed8b1;
+    text-align: center;
+}
+
+/*pictures*/
+* {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+/*Description*/
+.description {
+    text-align: center;
+    background: #39ff14;
+}
+
+.description p {
+    color: blue;
+}
