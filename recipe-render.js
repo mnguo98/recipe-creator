@@ -1,11 +1,12 @@
 
 //82278202631f441d86817f98bb2f9f49
 //5a38fb37355b47168d33551d70f5b0ec
+//76bf86b96e604b5581c4fd8e10f51933
 export async function loadRec() {
     const $root = $('#root');
     const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/recipes/random?apiKey=82278202631f441d86817f98bb2f9f49',
+        url: 'https://api.spoonacular.com/recipes/random?apiKey=76bf86b96e604b5581c4fd8e10f51933',
         number:1
       });
       let rec = result.data;

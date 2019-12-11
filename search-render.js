@@ -11,7 +11,7 @@ export const loadRecs=async function(event) {
   
   $appendhere.empty();
   
-  
+
   const form= event.target.parentElement;
   const ings = form.getElementsByClassName("ingslist")[0].value;
   var finalings="";
@@ -29,13 +29,13 @@ export const loadRecs=async function(event) {
   }
   console.log(ings);
   console.log(finalings);
-  console.log('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=82278202631f441d86817f98bb2f9f49');
+  console.log('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933');
 
 
 
       const result = await axios({
       method: 'get',
-      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=82278202631f441d86817f98bb2f9f49',
+      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933',
       });
       console.log(result);
       let rec = result.data;
@@ -60,7 +60,7 @@ export const loadRecs=async function(event) {
       console.log(listofids);
       const result2 = await axios({
           method: 'get',
-          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=82278202631f441d86817f98bb2f9f49'
+          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=76bf86b96e604b5581c4fd8e10f51933'
         });
         console.log(result2.data)
         let arrayofrecs = new Array();
@@ -100,7 +100,3 @@ $(function() {
     $root.on('click','.searchbut',loadRecs);
 
 });
-
-// export const run = function() {
-//   document.getElementById("searchbar").onclick("")
-// }
