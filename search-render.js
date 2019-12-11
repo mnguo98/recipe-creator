@@ -27,23 +27,12 @@ export const loadRecs=async function(event) {
     }
 
   }
-  // console.log(loggedIn);
-  // console.log(loggedInAccount);
-  // console.log(ings);
-  // console.log(finalings);
-  // console.log('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933');
-
-
 
       const result = await axios({
       method: 'get',
       url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
       });
-      // console.log(result);
-      let rec = result.data;
-      // console.log(typeof rec[0]['id'].toString());
-      // console.log( rec[0]['id'].toString());
-      
+      let rec = result.data;      
 
       let arrayofids = new Array();
       var listofids ="";
@@ -59,15 +48,12 @@ export const loadRecs=async function(event) {
   
     
       }
-      // console.log(listofids);
       const result2 = await axios({
           method: 'get',
           url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec'
         });
-        // console.log(result2.data)
         let arrayofrecs = new Array();
         arrayofrecs = result2.data;
-        // console.log(arrayofrecs);
         for(let l=0;l<arrayofrecs.length;l++)
         {
           var currec = arrayofrecs[l];
