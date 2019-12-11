@@ -5,9 +5,9 @@ function renderPage() {
         <div class="topnav">
                 <a class="mainpage" href="index.html">Home</a>
                 <a class="selrecipes" href="random_recipe.html">Random Recipe</a>
-                <a class="blog" href="blog.html">Blog</a>
+                <a class="blog" href="blog.html">Wine Pairing Search</a>
                 <a class="about" href="about.html">About</a>
-                <a class="login" href="login.html">Account</a>
+                <a class="login" href="login.html">Login</a>
         </div>
         <br>
         <div className="box has-background-white content">
@@ -48,9 +48,9 @@ const loggedInPage =
     <div class="topnav">
         <a class="mainpage" href="index.html">Home</a>
         <a class="selrecipes" href="random_recipe.html">Random Recipe</a>
-        <a class="blog" href="blog.html">Blog</a>
+        <a class="blog" href="blog.html">Wine Pairing Search</a>
         <a class="about" href="about.html">About</a>
-        <a class="login" href="login.html">Login</a>
+        <a class="login" href="login.html">Account</a>
     </div>
     <br>
     <div>
@@ -64,6 +64,8 @@ function renderLoggedIn(name) {
     $root.empty();
     $root.append(loggedInPage);
     document.getElementById("centered").innerHTML += name;
+    window.sessionStorage.setItem('loggedIn', 'true');
+    window.sessionStorage.setItem('logInAcc', name);
     $root.on('click', '.logout', handleLogout);
 
 }
@@ -72,7 +74,9 @@ export const handleLogout = async function(event) {
     const $root = $('#root');
     $root.empty();
     $root.append(renderPage());
-    $root.on('click', '.submit', handleSubmit);
+    window.sessionStorage.setItem('loggedIn', 'false');
+    window.sessionStorage.setItem('logInAcc', '');
+    $root.on('click', '.submit', handleCreate);
     $root.on('click', '.login', handleLogin);
 }
 
@@ -93,6 +97,7 @@ export const handleLogin = async function(event) {
     }
     if (exists) {
         if (accounts[index]['password'] === password) {
+            event.preventDefault();
             renderLoggedIn(username);
         }
         else {
@@ -106,7 +111,7 @@ export const handleLogin = async function(event) {
     }
 }
 
-export const handleSubmit = function(event) {
+export const handleCreate = function(event) {
     event.preventDefault();
     const form = event.target.parentElement;
     const elements = form.getElementsByClassName("field");
@@ -116,7 +121,7 @@ export const handleSubmit = function(event) {
         let array = [];
         array.push({'username': username, 'password': password});
         window.localStorage.setItem('accounts', JSON.stringify(array));
-
+        addToUsers(username);
     } else {
         let accounts = JSON.parse(window.localStorage.getItem('accounts'));
         let exists = false;
@@ -130,16 +135,36 @@ export const handleSubmit = function(event) {
             accounts.push({'username': username, 'password': password});
             window.localStorage.setItem('accounts', JSON.stringify(accounts));
             document.getElementById("createmes").innerHTML = 'Account successfully created';
+            // if (window.localStorage.getItem('user') === null);
+            addToUsers(username);
         } else {
             document.getElementById("createmes").innerHTML = 'Account already exists';
         }
     }
 }
 
+function addToUsers(username) {
+    if (window.localStorage.getItem('user') === null) {
+        let accountInfo = {};
+        accountInfo[username] = [];
+        // console.log(accountInfo);
+        window.localStorage.setItem('user', JSON.stringify(accountInfo));
+        console.log(JSON.parse(window.localStorage.getItem('user')));
+    } else if (JSON.parse(window.localStorage.getItem('user'))[username] === undefined) {
+        let users = JSON.parse(window.localStorage.getItem('user'));
+        users[username] = [];
+        window.localStorage.setItem('user', JSON.stringify(users));
+    }
+}
+
 $(function() {
-    const $root = $('#root');
-    $root.empty();
-    $root.append(renderPage());
-    $root.on('click', '.submit', handleSubmit);
-    $root.on('click', '.login', handleLogin);
+    if (window.sessionStorage.getItem('loggedIn') === 'true') {
+        renderLoggedIn(window.sessionStorage.getItem('logInAcc'));
+    } else {
+        const $root = $('#root');
+        $root.empty();
+        $root.append(renderPage());
+        $root.on('click', '.submit', handleCreate);
+        $root.on('click', '.login', handleLogin);
+    }
 });
