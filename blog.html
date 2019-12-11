@@ -6,12 +6,58 @@
 
         <title>Recipe Creator</title>
 
-        <link href="https://spoonacular.com/food-api?apiKey=82278202631f441d86817f98bb2f9f49">
-
         <link href="stylesheet.css" rel="stylesheet" type="text/css">
+       
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    var availableTags = [
+      "Apple",
+      "Artichoke",
+      "Beans",
+      "Beef",
+      "Butter",
+      "Cheese",
+      "Chicken",
+      "Chili",
+      "Egg",
+      "Flour",
+      "Garlic",
+      "Honey",
+      "Milk",
+      "Pasta",
+      "Potato",
+      "Rice",
+      "Olive",
+      "Onion",
+      "Orange",
+      "Pepper",
+      "Quinoa",
+      "Salt",
+      "Sugar",
+      "Tomato",
+      "Tortilla",
+      "Vanilla",
+      "Vinegar",
+      "Yogurt",
+
+
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+
+        <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+        
     </head>
     <body>
-        <div class="website">
+         <div class="website">
             <h1>Recipe Creator</h1>
         </div>
         <div class="topnav">
@@ -21,7 +67,8 @@
             <a class="about" href="about.html">About</a>
             <a class="login" id="toLogin" href="login.html">Login</a>
         </div>
-        <br>
+        
+        <br>      
         <br>
         <br>
         <br>
@@ -31,17 +78,24 @@
             <h3>Enter one ingredient (like apple), one cuisine (like italian), or food item (like chicken) to get the perfectly paired wine!</h3>
         </div>
         <div id ="root">
-            <form>
+            <div class="ui-widget">
+                <label for="tags">Tags: </label>
+                <input id="tags" class="winesearchbox">
+                <button class="searchbut">Search for Wine</button>
+            </div>
+            <!-- <form>
                 <textarea rows="5" cols="100" class="winesearchbox"></textarea><br>
                 <button class="searchbut">Search for Wine</button>
-            </form>
+            </form> -->
             <div id="appendhere"></div>
         </div>  
         <p id="output"></p>
         <ul id="matches"></ul>                 
-        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <!-- <script src="node_modules/jquery/dist/jquery.js"></script> -->
         <script src="wine-render.js" type="module"></script>
-        <script src="node_modules/axios/dist/axios.js"></script>    
+        <script src="node_modules/axios/dist/axios.js"></script>
+    
+        <!-- <br>
         <br>
         <br>
         <br>
@@ -51,8 +105,7 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
+        <br> -->
         <div class="row">
             <div class="column">
                 <img src="assets/FoodPicture1.jpg" alt="Good Food" style="width:100%">
@@ -69,6 +122,6 @@
         <div class="description">
             <h1>COMP 426</h1>
             <p>Matthew Guo, Omsai Meka, Brendan Mohr</p>
-        </div>    
+        </div> -->
     </body>
 </html>

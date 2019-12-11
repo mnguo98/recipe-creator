@@ -13,86 +13,42 @@ export const loadRecs=async function(event) {
     console.log(typeof ings);
 
     var finalings="";
-    //ings = "apples,orange,sugar"
-    // for(let k=0;k<ings.length;k++)
-    // {
-    //   if(ings[k]===",")
-    //   {
-    //     finalings+=",+";
-    //   }
-    //   else{
-    //     finalings+=ings[k];
-    //   }
-  
-    // }
-    // console.log(ings);
-    // console.log(finalings);
-    // console.log('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933');
-  
-  
-  
-        const result = await axios({
-        method: 'get',
-        url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
-        });
-        console.log(result);
-        let rec = result.data;
-        console.log(rec['pairingText']);
+      const result = await axios({
+      method: 'get',
+      url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f253b44ee70b4afa880343e3333db0ce',
+      });
+      console.log(result);
+      let rec = result.data;
+      console.log(rec['pairingText']);
+      console.log(rec['productMatches']);
+      console.log(rec['productMatches'][0]['title']);
 
-        // console.log( rec[0]['id'].toString());
-        
-        
-        let arrayofids = new Array();
-        var listofids ="";
-  
-        for (let j=0;j<rec.length;j++)
+      // console.log( rec[0]['id'].toString());
+      let pairedwineslist ="";
+      for(let k=0;k<rec['pairedWines'].length;k++)
+      {
+        if(k!=rec['pairedWines'].length-1)
         {
-          listofids += rec[j]['id'].toString();
-          if(j!=rec.length-1)
-          {
-            listofids+=",";
-          }
-          
-    
-      
+          pairedwineslist+=rec['pairedWines'][k]+",";
         }
-        //console.log(listofids);
-        const result2 = await axios({
-            method: 'get',
-            url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec'
-          });
-          //console.log(result2.data)
-          let arrayofrecs = new Array();
-          arrayofrecs = result2.data;
-          //console.log(arrayofrecs);
-          for(let l=0;l<arrayofrecs.length;l++)
-          {
-            var currec = arrayofrecs[l];
-            let inglist = [];
-            for(let i=0;i<currec.extendedIngredients.length;i++)
-            {
-              var ing = currec.extendedIngredients[i].original;
-              var editing = ing.replace(",","");
-              inglist.push('<p>'+editing+'</p>');
-            }
-            $appendhere.append(
-              '<div>'
-      +'<h1>' + currec.title + '</h1>'
-      +'<img src=' + currec.image + '></img>'
-      +'<h2> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
-      +'<h2> Number of Servings: '+currec.servings+' Portions </h2>'
-      +'<h2> Part of these Diet(s): '+currec.diets+' </h2>'
-      +'<h2> Ingredients: </h2>'
-      +'<ul>'
-      +inglist
-      +'</ul>'
-      +'<h2> Instructions: </h2>'
-      +'<h3>'+currec.instructions+'</h3>'
-      +'</div>');
-          }
-  
-      //   
-  }
+        else{
+          pairedwineslist+=rec['pairedWines'][k];
+        }
+    
+      }
+      $appendhere.append(
+          '<div>'
+        +'<h1>Wine Pairing(s)</h1>'
+        +'<h3>'+rec['pairingText']+'</h3>'
+        +'<h2> Paired Wine Types: '+pairedwineslist+'</h2>'
+        +'<h1> Wine of Choice</h1>'
+        +'<h2>'+rec['productMatches'][0]['title']+'</h2>'
+        +'<img src=' + rec['productMatches'][0]['imageUrl'] + '></img>'
+        +'<h3>'+rec['productMatches'][0]['price']+'</h3>'
+        +'<h3>'+rec['productMatches'][0]['description']+'</h3>'
+        +'</div>');
+}
+        
   
   const notUserPage = `
     <h1>You must be logged in to use this function.</h1>
@@ -117,6 +73,3 @@ export const loadRecs=async function(event) {
       }
   });
   
-  // export const run = function() {
-  //   document.getElementById("searchbar").onclick("")
-  // }
