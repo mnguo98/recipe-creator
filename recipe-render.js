@@ -5,7 +5,7 @@ export async function loadRec() {
     const $root = $('#root');
     const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/recipes/random?apiKey=5a38fb37355b47168d33551d70f5b0ec',
+        url: 'https://api.spoonacular.com/recipes/random?apiKey=82278202631f441d86817f98bb2f9f49',
         number:1
       });
       let rec = result.data;
@@ -20,7 +20,7 @@ export async function loadRec() {
       $root.append(
     '<div>'
     +'<h1>' + rec.recipes[0].title + '</h1>'
-    +'<img src='+rec.recipes[0].image + 'alt="Recipe Image" ></img>'
+    +'<img src=' + rec.recipes[0].image + '></img>'
     +'<h2> Cook Time: '+rec.recipes[0].readyInMinutes+' Minutes </h2>'
     +'<h2> Number of Servings: '+rec.recipes[0].servings+' Portions </h2>'
     +'<h2> Part of these Diet(s): '+rec.recipes[0].diets+' </h2>'

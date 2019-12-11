@@ -27,17 +27,22 @@
             <h1>Search for Recipes</h1>
         </div>
         <div class = "instrforsearch">
-            <h3>Type in ingredients separated by commas</h3>
+            <h3>Type in ingredients separated by commas but do not put spaces in between comma and next letter</h3>
         </div>
         <div class="searchheading">
             <h2>Recipe Search</h2>
         </div>
-        <div class="searchbar">
+        <div id="root">
             <form>
-                <textarea rows="5" cols="100" name="fname"></textarea><br>
-                <input type="submit" value="Submit">
+                <textarea rows="5" cols="100" class="ingslist"></textarea><br>
+                <button class="searchbut">Search</button>
             </form>
+            <div id="appendhere"></div>
         </div>
+       
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="search-render.js" type="module"></script>
+        <script src="node_modules/axios/dist/axios.js"></script>
         <br>
         <br>
         <br>
