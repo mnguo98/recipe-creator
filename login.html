@@ -9,66 +9,10 @@
         <link href="stylesheet.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="website">
-            <h1>Recipe Creator</h1>
-        </div>
-        <div class="topnav">
-            <a class="mainpage" href="index.html">Home</a>
-            <a class="selrecipes" href="random_recipe.html">Random Recipe</a>
-            <a class="blog" href="blog.html">Wine Pairing Search</a>
-            <a class="about" href="about.html">About</a>
-            <a class="login" href="login.html">Login</a>
-        </div>
-        <br>
-        <h2>Login</h2>
-        <div class="loginfield">
-                <div class="loginusername">
-                        <label>Username</label>
-                        <input type="text" id="login_username">
-                </div>
-                <div class="loginpassword">
-                        <label for="pass">Password</label>
-                        <input type="text" id="login_password">
-                </div>                    
-                <button type="login">Login</button>
-        </div>
-        <br>
-        <h2>Create Account</h2>
-        <div class="loginfield">
-                <div class="signupname">
-                        <label>Full Name</label>
-                        <input type="text" id="signup_name">
-                </div>
-                <div class="signupemail">
-                        <label for="pass">Email</label>
-                        <input type="text" id="signup_email">
-                </div>   
-                <div class="signupusername">
-                        <label>Username</label>
-                        <input type="text" id="signup_username">
-                </div>
-                <div class="signuppassword">
-                        <label for="pass">Password</label>
-                        <input type="text" id="signup_password">
-                </div>                    
-                <button type="createacc">Create Account</button>
-        </div>
-        <div class="row">
-                <div class="column">
-                    <img src="assets/FoodPicture1.jpg" alt="Good Food" style="width:100%">
-                </div>
-                <div class="column">
-                    <img src="assets/FoodPicture2.jpg" alt="Tall Food" style="width:100%">
-                </div>
-                <div class="column">
-                    <img src="assets/FoodPicture3.jpg" alt="Weird French Food" style="width:100%">
-                </div>
-            </div>
-        <br>
-        <br>
-        <div class="description">
-                <h1>COMP 426</h1>
-                <p>Matthew Guo, Omsai Meka, Brendan Mohr</p>
-        </div>     
+        <div id="root"></div>
+
+        <script src='node_modules/jquery/dist/jquery.js'></script>
+        <script src="login-render.js" type="module"></script>
     </body>
+
 </html>
