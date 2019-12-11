@@ -17,7 +17,7 @@
         <div class="topnav">
             <a class="mainpage" href="index.html">Home</a>
             <a class="selrecipes" href="random_recipe.html">Random Recipe</a>
-            <a class="blog" href="blog.html">Blog</a>
+            <a class="blog" href="blog.html">Wine Pairing Search</a>
             <a class="about" href="about.html">About</a>
             <a class="login" href="login.html">Login</a>
         </div>
@@ -26,30 +26,29 @@
         <br>
         <br>
         <br>
-        <div class ="putblogposthere">
-                <div class="blognamefield">
-                        <div class="blogname">
-                                <label>Name</label>
-                                <input type="text" id="blog_name">
-                        </div>
-                        <div class="blogpost">
-                                <form>
-                                    <label>Blog Post</label>
-                                    <textarea rows="10" cols="200" name="blogentry"></textarea><br>
-                                </form>
-                        </div>                   
-                </div>
-                <button type="login">Post Blog</button>
+        <div id='titles'>
+            <h1>Wine Search</h1>
+            <h3>Enter one ingredient (like apple), one cuisine (like italian), or food item (like chicken) to get the perfectly paired wine!</h3>
         </div>
+        <div id ="root">
+            <form>
+                <textarea rows="5" cols="100" class="winesearchbox"></textarea><br>
+                <button class="searchbut">Search for Wine</button>
+            </form>
+            <div id="appendhere"></div>
+        </div>  
+        <p id="output"></p>
+        <ul id="matches"></ul>                 
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="wine-render.js" type="module"></script>
+        <script src="node_modules/axios/dist/axios.js"></script>
+    
         <br>
         <br>
         <br>
         <br>
         <br>
         <br>
-        <div class ="putblogpostshere">
-
-        </div>
         <br>
         <br>
         <br>
