@@ -75,10 +75,42 @@
 
 /*Logged in Text and Button*/
 #centered {
-    text-align: center;
+    text-align: right;
 }
 
-.logout {
+.logout, .delete {
+    display: inline-block;
     position: relative;
-    left: 47%;
+    left: 87%;
+}
+
+#change {
+    position: relative;
+    left: 90%;
+}
+
+/*Search History*/
+#hist {
+    text-align: list;
+}
+
+.histrec {
+    text-align: list;
+}
+
+/* Change Password */
+.passchange {
+    position: relative;
+    left: 76.7%;
+}
+
+/* Recent Randoms */
+#randoms {
+    height: 200px;
+    width: 50%;
+    position: relative;
+    display: center;
+    border: 1px solid #ccc;
+    font: 16px/26px Georgia, Garamond, Serif;
+    overflow: auto;
 }

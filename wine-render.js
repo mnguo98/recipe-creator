@@ -33,7 +33,7 @@ export const loadRecs=async function(event) {
   
         const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933',
+        url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
         });
         console.log(result);
         let rec = result.data;
@@ -59,7 +59,7 @@ export const loadRecs=async function(event) {
         //console.log(listofids);
         const result2 = await axios({
             method: 'get',
-            url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=76bf86b96e604b5581c4fd8e10f51933'
+            url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec'
           });
           //console.log(result2.data)
           let arrayofrecs = new Array();
@@ -94,9 +94,27 @@ export const loadRecs=async function(event) {
       //   
   }
   
+  const notUserPage = `
+    <h1>You must be logged in to use this function.</h1>
+    <h2>Click below to login or create and account</h2>
+    <input id="toLogin" className="button is-primary" type="submit" value="Go to Login Page"/>
+  `;
+
   $(function() {
-      const $root = $('#root');
-      $root.on('click','.searchbut',loadRecs);
+      console.log(window.sessionStorage.getItem('loggedIn'))
+      if (window.sessionStorage.getItem('loggedIn') === 'true') {
+        const $root = $('#root');
+        $root.on('click','.searchbut',loadRecs);
+        document.getElementById('toLogin').innerHTML = 'Account';
+      }
+      else {
+        const $titles = $('#titles');
+        const $root = $('#root');
+        $titles.empty();
+        $titles.append(notUserPage);
+        $root.empty();
+        document.getElementById('toLogin').innerHTML = 'Login';
+      }
   });
   
   // export const run = function() {
