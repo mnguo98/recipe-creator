@@ -38,58 +38,40 @@ export const loadRecs=async function(event) {
         console.log(result);
         let rec = result.data;
         console.log(rec['pairingText']);
+        console.log(rec['productMatches']);
+        console.log(rec['productMatches'][0]['title']);
 
         // console.log( rec[0]['id'].toString());
-        
-        
-        let arrayofids = new Array();
-        var listofids ="";
-  
-        for (let j=0;j<rec.length;j++)
+        let pairedwineslist ="";
+        for(let k=0;k<rec['pairedWines'].length;k++)
         {
-          listofids += rec[j]['id'].toString();
-          if(j!=rec.length-1)
+          if(k!=rec['pairedWines'].length-1)
           {
-            listofids+=",";
+            pairedwineslist+=rec['pairedWines'][k]+",";
           }
-          
-    
+          else{
+            pairedwineslist+=rec['pairedWines'][k];
+          }
       
         }
+
+        
+        
+    
         //console.log(listofids);
-        const result2 = await axios({
-            method: 'get',
-            url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=76bf86b96e604b5581c4fd8e10f51933'
-          });
-          //console.log(result2.data)
-          let arrayofrecs = new Array();
-          arrayofrecs = result2.data;
-          //console.log(arrayofrecs);
-          for(let l=0;l<arrayofrecs.length;l++)
-          {
-            var currec = arrayofrecs[l];
-            let inglist = [];
-            for(let i=0;i<currec.extendedIngredients.length;i++)
-            {
-              var ing = currec.extendedIngredients[i].original;
-              var editing = ing.replace(",","");
-              inglist.push('<p>'+editing+'</p>');
-            }
-            $appendhere.append(
-              '<div>'
-      +'<h1>' + currec.title + '</h1>'
-      +'<img src=' + currec.image + '></img>'
-      +'<h2> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
-      +'<h2> Number of Servings: '+currec.servings+' Portions </h2>'
-      +'<h2> Part of these Diet(s): '+currec.diets+' </h2>'
-      +'<h2> Ingredients: </h2>'
-      +'<ul>'
-      +inglist
-      +'</ul>'
-      +'<h2> Instructions: </h2>'
-      +'<h3>'+currec.instructions+'</h3>'
+        
+    $appendhere.append(
+       '<div>'
+      +'<h1>Wine Pairing(s)</h1>'
+      +'<h3>'+rec['pairingText']+'</h3>'
+      +'<h2> Paired Wine Types: '+pairedwineslist+'</h2>'
+      +'<h1> Wine of Choice</h1>'
+      +'<h2>'+rec['productMatches'][0]['title']+'</h2>'
+      +'<img src=' + rec['productMatches'][0]['imageUrl'] + '></img>'
+      +'<h3>'+rec['productMatches'][0]['price']+'</h3>'
+      +'<h3>'+rec['productMatches'][0]['description']+'</h3>'
       +'</div>');
-          }
+    
   
       //   
   }
