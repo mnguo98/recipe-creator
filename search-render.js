@@ -27,21 +27,12 @@ export const loadRecs=async function(event) {
     }
 
   }
-  console.log(ings);
-  console.log(finalings);
-  console.log('https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933');
-
-
 
       const result = await axios({
       method: 'get',
-      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=76bf86b96e604b5581c4fd8e10f51933',
+      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
       });
-      console.log(result);
-      let rec = result.data;
-      console.log(typeof rec[0]['id'].toString());
-      console.log( rec[0]['id'].toString());
-      
+      let rec = result.data;      
 
       let arrayofids = new Array();
       var listofids ="";
@@ -57,15 +48,12 @@ export const loadRecs=async function(event) {
   
     
       }
-      console.log(listofids);
       const result2 = await axios({
           method: 'get',
-          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=76bf86b96e604b5581c4fd8e10f51933'
+          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec'
         });
-        console.log(result2.data)
         let arrayofrecs = new Array();
         arrayofrecs = result2.data;
-        console.log(arrayofrecs);
         for(let l=0;l<arrayofrecs.length;l++)
         {
           var currec = arrayofrecs[l];
@@ -76,27 +64,50 @@ export const loadRecs=async function(event) {
             var editing = ing.replace(",","");
             inglist.push('<p>'+editing+'</p>');
           }
-          $appendhere.append(
-            '<div>'
-    +'<h1>' + currec.title + '</h1>'
-    +'<img src=' + currec.image + '></img>'
-    +'<h2> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
-    +'<h2> Number of Servings: '+currec.servings+' Portions </h2>'
-    +'<h2> Part of these Diet(s): '+currec.diets+' </h2>'
-    +'<h2> Ingredients: </h2>'
-    +'<ul>'
-    +inglist
-    +'</ul>'
-    +'<h2> Instructions: </h2>'
-    +'<h3>'+currec.instructions+'</h3>'
-    +'</div>');
+          let recipeCard = '<div>'
+                        +'<h1>' + currec.title + '</h1>'
+                        +'<img src=' + currec.image + '></img>'
+                        +'<h2> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
+                        +'<h2> Number of Servings: '+currec.servings+' Portions </h2>'
+                        +'<h2> Part of these Diet(s): '+currec.diets+' </h2>'
+                        +'<h2> Ingredients: </h2>'
+                        +'<ul>'
+                        +inglist
+                        +'</ul>'
+                        +'<h2> Instructions: </h2>'
+                        +'<h3>'+currec.instructions+'</h3>'
+                        +'</div>';
+          $appendhere.append(recipeCard);
         }
-
+        if (window.sessionStorage.getItem('loggedIn')) {
+          let username = window.sessionStorage.getItem('logInAcc');
+          let users = JSON.parse(window.localStorage.getItem('user'));
+          if (users[username] !== undefined) {
+            let query = cleanUpString(finalings);
+            users[username].push(query);
+            window.localStorage.setItem('user', JSON.stringify(users));
+          }
+        }
     //   
+}
+
+function cleanUpString(ings) {
+  let finalIngs = "";
+  for(let k=0; k<ings.length; k++)
+  {
+    if(ings[k] === "+")
+    {
+      finalIngs += " ";
+    }
+    else{
+      finalIngs += ings[k];
+    }
+
+  }
+  return finalIngs;
 }
 
 $(function() {
     const $root = $('#root');
     $root.on('click','.searchbut',loadRecs);
-
 });
