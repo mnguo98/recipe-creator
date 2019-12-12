@@ -10,20 +10,15 @@ export const loadRecs=async function(event) {
     $appendhere.empty();
     const form= event.target.parentElement;
     const ings = form.getElementsByClassName("winesearchbox")[0].value;
-    console.log(typeof ings);
 
     var finalings="";
       const result = await axios({
       method: 'get',
       url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f253b44ee70b4afa880343e3333db0ce',
       });
-      console.log(result);
       let rec = result.data;
-      console.log(rec['pairingText']);
-      console.log(rec['productMatches']);
-      console.log(rec['productMatches'][0]['title']);
 
-      // console.log( rec[0]['id'].toString());
+
       let pairedwineslist ="";
       for(let k=0;k<rec['pairedWines'].length;k++)
       {
@@ -57,7 +52,6 @@ export const loadRecs=async function(event) {
   `;
 
   $(function() {
-      console.log(window.sessionStorage.getItem('loggedIn'))
       if (window.sessionStorage.getItem('loggedIn') === 'true') {
         const $root = $('#root');
         $root.on('click','.searchbut',loadRecs);
