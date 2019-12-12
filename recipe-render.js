@@ -6,7 +6,7 @@ export async function loadRec() {
     const $root = $('#root');
     const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/recipes/random?apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
+        url: 'https://api.spoonacular.com/recipes/random?apiKey=5a38fb37355b47168d33551d70f5b0ec',
         number:1
       });
       let rec = result.data;
@@ -44,10 +44,14 @@ export async function loadRec() {
 }
 
 function renderRandoms() {
-  const $randoms = $('#randoms');
+  const $randoms = $('#random');
   let rands = JSON.parse(window.localStorage.getItem('public'));
-  for (let i=0; i<rands.length; i++) {
-    $randoms.append(`<h5>${i+1}. ${rands[rands.length-i-1]}</h5>`);
+  if (rands === null) {
+    $randoms.append(`<h5></h5>`);
+  } else {
+    for (let i=0; i<rands.length; i++) {
+      $randoms.append(`<h5>${i+1}. ${rands[rands.length-i-1]}</h5>`);
+    }
   }
 }
 
