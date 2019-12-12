@@ -9,10 +9,12 @@
         <link href="https://spoonacular.com/food-api?apiKey=82278202631f441d86817f98bb2f9f49">
 
         <link href="stylesheet.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+
     </head>
     <body>
-        <div class="website">
-            <h1>Recipe Creator</h1>
+        <div class="website hero is-info">
+            <br><h1 class="title is-1 is-dark">Recipe Creator</h1><br>
         </div>
         <div class="topnav">
             <a class="mainpage" href="index.html">Home</a>
@@ -22,23 +24,24 @@
             <a class="login" href="login.html">Login</a>
         </div>
         <br>
-        <br>
-        <div class="titleforsearch">
-            <h1>Search for Recipes</h1>
-        </div>
-        <div class = "instrforsearch">
+        <center><div class="titleforsearch">
+            <h1 class="title is-2">Search for Recipes</h1>
+        </div></center>
+        <center><div class ="title is-3 instrforsearch">
             <h3>Type in ingredients separated by commas but do not put spaces in between comma and next letter</h3>
-        </div>
-        <div class="searchheading">
+        </div></center>
+        <br>
+        <br>
+        <!-- <div class="searchheading subtitle is-5">
             <h2>Recipe Search</h2>
-        </div>
-        <div id="root">
+        </div> -->
+        <center><div id="root">
             <form>
                 <textarea rows="5" cols="100" class="ingslist"></textarea><br>
-                <button class="searchbut">Search</button>
+                <button class="searchbut button is-info">Search</button>
             </form>
             <div id="appendhere"></div>
-        </div>
+        </div></center>
        
         <script src="node_modules/jquery/dist/jquery.js"></script>
         <script src="search-render.js" type="module"></script>
@@ -52,22 +55,22 @@
         <br>
         <br>
         <br>
-        <div class="row">
-            <div class="column">
+        <div class="columns">
+            <div class="column ">
                 <img src="assets/FoodPicture1.jpg" alt="Good Food" style="width:100%">
             </div>
-            <div class="column">
+            <div class="column ">
                 <img src="assets/FoodPicture2.jpg" alt="Tall Food" style="width:100%">
             </div>
-            <div class="column">
+            <div class="column ">
                 <img src="assets/FoodPicture3.jpg" alt="Weird French Food" style="width:100%">
             </div>
         </div>
         <br>
         <br>
-        <div class="description">
-            <h1>COMP 426</h1>
-            <p>Matthew Guo, Omsai Meka, Brendan Mohr</p>
+        <div class="description hero is-info">
+            <h1 class="title is-3 is-dark">COMP 426</h1>
+            <p class ="subtitle is-4 is-dark">Matthew Guo, Omsai Meka, Brendan Mohr</p>
         </div>    
     </body>
 </html>
