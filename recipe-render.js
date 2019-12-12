@@ -6,18 +6,11 @@ export async function loadRec() {
     const $root = $('#root');
     const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/recipes/random?apiKey=758067ecf20b4f84a4fff92935e8c36e',
+        url: 'https://api.spoonacular.com/recipes/random?apiKey=c0e9b2b394c2436b9bfd1f03efff452e',
         number:1
       });
       let rec = result.data;
       let inglist = [];
-      for(let i=0;i<rec.recipes[0].extendedIngredients.length;i++)
-      {
-        var ing = rec.recipes[0].extendedIngredients[i].original;
-        var editing = ing.replace(/,/g,'')
-        inglist.push('<p>'+editing+'</p>');
-      }
-      console.log(inglist);
       let randRec = '<div>'
                     +'<h1 class ="title is-3">' + rec.recipes[0].title + '</h1>'
                     +'<img src=' + rec.recipes[0].image + '></img>'
@@ -25,14 +18,16 @@ export async function loadRec() {
                     +'<h2 class ="title is-5"> Number of Servings: '+rec.recipes[0].servings+' Portions </h2>'
                     +'<h2 class ="title is-5"> Part of these Diet(s): '+rec.recipes[0].diets+' </h2>'
                     +'<h2 class ="title is-4"> Ingredients: </h2>'
-                    +'<ul class="subtitle is-5">'
-                    +inglist
-                    +'</ul>'
-                    +'<br>'
-                    +'<br>'
+                    +'<ul class="subtitle is-5">';
+      for(let i=0;i<rec.recipes[0].extendedIngredients.length;i++)
+      {
+        var ing = rec.recipes[0].extendedIngredients[i].original;
+        randRec += '<p>'+ing+'</p>';
+      }
+        randRec += '</ul><br>'
                     +'<h2 class ="title is-4"> Instructions: </h2>'
                     +'<h3 class="subtitle is-5">'+rec.recipes[0].instructions+'</h3>'
-                    +'</div>';
+                    +'</div><br>';
       $root.append(randRec);
       if (window.localStorage.getItem('public') === null) {
         let randomRecs = [];

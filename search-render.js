@@ -30,13 +30,20 @@ export const loadRecs=async function(event) {
 
       const result = await axios({
       method: 'get',
-      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=758067ecf20b4f84a4fff92935e8c36e',
+      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=c0e9b2b394c2436b9bfd1f03efff452e',
       });
       let rec = result.data;      
 
       let arrayofids = new Array();
       var listofids ="";
-
+      console.log(rec);
+      if(rec.length==0){
+        let recipeCard = '<div>'
+                        +'<h1 class="title is-2">No recipes found for those ingredients.</h1>'
+                        +'</div>';
+          $appendhere.append(recipeCard);
+      }
+      else{
       for (let j=0;j<rec.length;j++)
       {
         listofids += rec[j]['id'].toString();
@@ -50,7 +57,7 @@ export const loadRecs=async function(event) {
       }
       const result2 = await axios({
           method: 'get',
-          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=758067ecf20b4f84a4fff92935e8c36e'
+          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=c0e9b2b394c2436b9bfd1f03efff452e'
         });
         let arrayofrecs = new Array();
         arrayofrecs = result2.data;
@@ -58,25 +65,24 @@ export const loadRecs=async function(event) {
         {
           var currec = arrayofrecs[l];
           let inglist = [];
+          let recipeCard = '<div>'
+                        +'<h1 class ="title is-3">' + currec.title + '</h1>'
+                        +'<img src=' + currec.image + '></img>'
+                        +'<h2 class ="title is-5"> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
+                        +'<h2 class ="title is-5"> Number of Servings: '+currec.servings+' Portions </h2>'
+                        +'<h2 class ="title is-5"> Part of these Diet(s): '+currec.diets+' </h2>'
+                        +'<h2 class ="title is-4"> Ingredients: </h2>'
+                        +'<ul class="subtitle is-5">';
           for(let i=0;i<currec.extendedIngredients.length;i++)
           {
             var ing = currec.extendedIngredients[i].original;
-            var editing = ing.replace(",","");
-            inglist.push('<p>'+editing+'</p>');
+            recipeCard += '<p>'+ing+'</p>';
+
           }
-          let recipeCard = '<div>'
-                        +'<h1>' + currec.title + '</h1>'
-                        +'<img src=' + currec.image + '></img>'
-                        +'<h2> Cook Time: '+currec.readyInMinutes+' Minutes </h2>'
-                        +'<h2> Number of Servings: '+currec.servings+' Portions </h2>'
-                        +'<h2> Part of these Diet(s): '+currec.diets+' </h2>'
-                        +'<h2> Ingredients: </h2>'
-                        +'<ul>'
-                        +inglist
-                        +'</ul>'
-                        +'<h2> Instructions: </h2>'
-                        +'<h3>'+currec.instructions+'</h3>'
-                        +'</div>';
+          recipeCard += '</ul><br>'
+                        +'<h2 class ="title is-4"> Instructions: </h2>'
+                        +'<h3 class="subtitle is-5">'+currec.instructions+'</h3>'
+                        +'</div><br>';
           $appendhere.append(recipeCard);
         }
         if (window.sessionStorage.getItem('loggedIn')) {
@@ -88,6 +94,7 @@ export const loadRecs=async function(event) {
             window.localStorage.setItem('user', JSON.stringify(users));
           }
         }
+      }
     //   
 }
 

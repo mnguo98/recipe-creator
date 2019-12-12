@@ -15,7 +15,7 @@ export const loadRecs = async function(event) {
   var finalings="";
     const result = await axios({
     method: 'get',
-    url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=758067ecf20b4f84a4fff92935e8c36e',
+    url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=c0e9b2b394c2436b9bfd1f03efff452e',
     });
     let rec = result.data;
   
