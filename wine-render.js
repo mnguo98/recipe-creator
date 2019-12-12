@@ -15,7 +15,7 @@ export const loadRecs = async function(event) {
   var finalings="";
     const result = await axios({
     method: 'get',
-    url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f253b44ee70b4afa880343e3333db0ce',
+    url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=758067ecf20b4f84a4fff92935e8c36e',
     });
     let rec = result.data;
   
@@ -61,6 +61,7 @@ export const loadRecs = async function(event) {
     +'</div>'
 
   );
+}
 
   if (window.localStorage.getItem('private') === null) {
     let pairs = [];
@@ -72,7 +73,6 @@ export const loadRecs = async function(event) {
     window.localStorage.setItem('private', JSON.stringify(pairs));
   }
 }
-}
         
 function renderOtherPairs() {
   const $other = $('#otherpairs');
@@ -81,6 +81,9 @@ function renderOtherPairs() {
     $other.append(`<h5></h5>`);
   } else {
     for (let i=0; i<10; i++) {
+      if (pairs[i] === undefined) {
+        break;
+      }
       $other.append(`<h5 class="subtitle is-5">${i+1}. ${pairs[pairs.length-i-1]}</h5>`);
     }
   }

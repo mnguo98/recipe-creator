@@ -6,7 +6,7 @@ export async function loadRec() {
     const $root = $('#root');
     const result = await axios({
         method: 'get',
-        url: 'https://api.spoonacular.com/recipes/random?apiKey=5a38fb37355b47168d33551d70f5b0ec',
+        url: 'https://api.spoonacular.com/recipes/random?apiKey=758067ecf20b4f84a4fff92935e8c36e',
         number:1
       });
       let rec = result.data;
@@ -53,6 +53,9 @@ function renderRandoms() {
     $randoms.append(`<h5></h5>`);
   } else {
     for (let i=0; i<10; i++) {
+      if (rands[i] === undefined) {
+        break;
+      }
       $randoms.append(`<h5 class="subtitle is-5">${i+1}. ${rands[rands.length-i-1]}</h5>`);
     }
   }
