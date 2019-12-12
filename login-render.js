@@ -81,7 +81,7 @@ const changePasswordPage =
         <input class="delete" className="button is-primary" type="submit" value="Delete Account" />
     </div>
     <div class="passchange">
-        <input class="change" type="text"/>
+        <input class="change" type="password"/>
         <input class="confirm" className="button is-primary" type="submit" value=Confirm />
         <input class="cancel" className="button is-primary" type="submit" value="Cancel" />
     <div>
@@ -126,7 +126,7 @@ export const handleDelete = async function(event) {
     const $root = $('#root');
     $root.empty();
     $root.append(renderPage());
-    $root.on('click', '.submit', handleCreate);
+    // $root.on('click', '.submit', handleCreate);
     $root.on('click', '.login', handleLogin);
     let accs = JSON.parse(window.localStorage.getItem('accounts'));
     for (let i=0; i<accs.length; i++) {
@@ -136,6 +136,9 @@ export const handleDelete = async function(event) {
         }
     }
     window.localStorage.setItem('accounts', JSON.stringify(accs));
+    let users = JSON.parse(window.localStorage.getItem('user'));
+    delete users[window.sessionStorage.getItem('logInAcc')];
+    window.localStorage.setItem('user', JSON.stringify(users));
     window.sessionStorage.setItem('loggedIn', 'false');
     window.sessionStorage.setItem('logInAcc', '');
 }
@@ -145,8 +148,8 @@ export const handleChangePassword = async function(event) {
     $root.empty();
     $root.append(changePasswordPage);
     document.getElementById("centered").innerHTML += window.sessionStorage.getItem('logInAcc');
-    $root.on('click', '.logout', handleLogout);
-    $root.on('click', '.delete', handleDelete);
+    // $root.on('click', '.logout', handleLogout);
+    // $root.on('click', '.delete', handleDelete);
     $root.on('click', '.confirm', handleSubmit);
     $root.on('click', '.cancel', handleCancel);
     renderSearchHistory();
@@ -175,7 +178,7 @@ export const handleLogout = async function(event) {
     $root.append(renderPage());
     window.sessionStorage.setItem('loggedIn', 'false');
     window.sessionStorage.setItem('logInAcc', '');
-    $root.on('click', '.submit', handleCreate);
+    // $root.on('click', '.submit', handleCreate);
     $root.on('click', '.login', handleLogin);
 }
 
@@ -212,25 +215,28 @@ export const handleLogin = async function(event) {
 
 export const handleCreate = function(event) {
     event.preventDefault();
+    // console.log(JSON.parse(window.localStorage.getItem('accounts')));
     const form = event.target.parentElement;
     const elements = form.getElementsByClassName("field");
     const username = elements[0].getElementsByTagName("input")[0].value;
     const password = elements[1].getElementsByTagName("input")[0].value;
+    let exists = false;
     if (window.localStorage.getItem('accounts') === null) {
         let array = [];
         array.push({'username': username, 'password': password});
         window.localStorage.setItem('accounts', JSON.stringify(array));
+        document.getElementById("createmes").innerHTML = 'Account successfully created';
         addToUsers(username);
     } else {
         let accounts = JSON.parse(window.localStorage.getItem('accounts'));
-        let exists = false;
         for (let i=0; i<accounts.length; i++) {
             if (accounts[i]['username'] === username) {
                 exists = true;
                 break;
             }
         }
-        if (!exists) {
+        console.log(exists);
+        if (!(exists)) {
             accounts.push({'username': username, 'password': password});
             window.localStorage.setItem('accounts', JSON.stringify(accounts));
             document.getElementById("createmes").innerHTML = 'Account successfully created';
