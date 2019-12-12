@@ -11,8 +11,8 @@
 
     </head>
     <body>
-        <div class="website">
-            <h1>Recipe Creator</h1>
+        <div class="website hero is-info">
+            <br><h1 class="title is-1 is-dark">Recipe Creator</h1><br>
         </div>
         <div class="topnav">
             <a class="mainpage" href="index.html">Home</a>
@@ -23,25 +23,23 @@
         </div>
         <br>
         <br>
-        <div class="aboutinfo">
+        <br>
+        <div class="aboutinfo title is-1">
             <h1>About Recipe Creator</h1>
             <br>
-            <h3>Our group has developed an application that suggests recipes for the user to
+            <h3 class ="subtitle is-3">Our group has developed an application that suggests recipes for the user to
                 make. The idea is that the user will input ingredients and food items that they have
                 available to them at the time. While the user inputs their ingredients, the autocomplete
                 function will shows potential suggestions for what the user may be inputting. In return, the
                 app will search through a database of recipes, find recipes that use most (if not all) of the
-                ingredients the user input, and return those recipes. If the recipe requires more
-                ingredients, the user will be notified. The user will have the option of creating an account to
-                store the history of their queries, favorite recipes for future reference, and potentially make
-                posts to suggest recipes to other users.
+                ingredients the user input, and return those recipes. The user will have the option of creating an account to
+                store the history of their queries.
 
-                For the public data store, any user will be allowed to query for recipes and submit
-                other recipes for the database. For the private data store, users will have the benefit of
-                making posts reviewing recipes that they have tried as well as interacting with other posts
-                made. For the user data store, users will be able to adjust their login information, view their
-                favorites and posts, and set their recipes preferences. The third party API that we will most
-                likely use is spoonacular.com’s public API (https://spoonacular.com/food-api). This API
+                For the public data store, any user will be allowed to query for recipes and have access to the 
+                database of random recipes. For the private data store, users will gain access to the wine pairing
+                database and can see and request pairings for certain foods. For the user data store, users will be 
+                able to adjust their login information, delete their account, and view their past recipe queries. 
+                The third party API that we are using is Spoonacular's public API (https://spoonacular.com/food-api). This API
                 contains recipes and nutritional information that we can provide our users with.</h3>
         </div>
         <div class="row">
@@ -59,9 +57,11 @@
         <br>
         <script src="node_modules/jquery/dist/jquery.js"></script>
         <script src="aboutpage.js" type="module"></script>
-        <div class="description">
-            <h1>COMP 426</h1>
-            <p>Matthew Guo, Omsai Meka, Brendan Mohr</p>
-        </div>    
+        <br>
+        <br>
+        <div class="description hero is-info">
+            <h1 class="title is-3 is-dark">COMP 426</h1>
+            <p class ="subtitle is-4 is-dark">Matthew Guo, Omsai Meka, Brendan Mohr</p>
+        </div>   
     </body>
 </html>

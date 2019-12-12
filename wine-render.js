@@ -18,7 +18,24 @@ export const loadRecs = async function(event) {
     url: 'https://api.spoonacular.com/food/wine/pairing?food='+ings+'&apiKey=f253b44ee70b4afa880343e3333db0ce',
     });
     let rec = result.data;
+  
+  console.log(rec['pairedWines']);
 
+  if((typeof rec['pairedWines']) == 'undefined' )
+  {
+    $appendhere.append('<div>'
+    +'<h1 class="title is-3">Wine Pairing(s) not found for '+ings+'</h1>'
+    +'</div>');
+  }
+  else if(rec['pairedWines'].length==0)
+  {
+    $appendhere.append('<div>'
+    +'<h1 class="title is-3">Wine Pairing(s) not found for '+ings+'</h1>'
+    +'</div>');
+  }
+  
+  else
+  {
   let pairedwineslist ="";
   for(let k=0;k<rec['pairedWines'].length;k++)
   {
@@ -33,15 +50,16 @@ export const loadRecs = async function(event) {
   }
   $appendhere.append(
       '<div>'
-    +'<h1>Wine Pairing(s)</h1>'
-    +'<h3>'+rec['pairingText']+'</h3>'
-    +'<h2> Paired Wine Types: '+pairedwineslist+'</h2>'
-    +'<h1> Wine of Choice</h1>'
-    +'<h2>'+rec['productMatches'][0]['title']+'</h2>'
+    +'<h1 class="title is-3">Wine Pairing(s)</h1>'
+    +'<h3 class="subtitle is-5">'+rec['pairingText']+'</h3>'
+    +'<h2 class ="title is-5"> Paired Wine Types: '+pairedwineslist+'</h2>'
+    +'<h1 class ="title is-4"> Wine of Choice</h1>'
+    +'<h2 class ="title is-5">'+rec['productMatches'][0]['title']+'</h2>'
     +'<img src=' + rec['productMatches'][0]['imageUrl'] + '></img>'
-    +'<h3>'+rec['productMatches'][0]['price']+'</h3>'
-    +'<h3>'+rec['productMatches'][0]['description']+'</h3>'
+    +'<h3 class="subtitle is-5">'+rec['productMatches'][0]['price']+'</h3>'
+    +'<h3 class="subtitle is-5">'+rec['productMatches'][0]['description']+'</h3>'
     +'</div>'
+
   );
 
   if (window.localStorage.getItem('private') === null) {
@@ -54,6 +72,7 @@ export const loadRecs = async function(event) {
     window.localStorage.setItem('private', JSON.stringify(pairs));
   }
 }
+}
         
 function renderOtherPairs() {
   const $other = $('#otherpairs');
@@ -61,16 +80,16 @@ function renderOtherPairs() {
   if (pairs === null) {
     $other.append(`<h5></h5>`);
   } else {
-    for (let i=0; i<pairs.length; i++) {
-      $other.append(`<h5>${i+1}. ${pairs[pairs.length-i-1]}</h5>`);
+    for (let i=0; i<10; i++) {
+      $other.append(`<h5 class="subtitle is-5">${i+1}. ${pairs[pairs.length-i-1]}</h5>`);
     }
   }
 }  
 
 const notUserPage = `
-  <h1>You must be logged in to use this function.</h1>
-  <h2>Click below to login or create and account</h2>
-  <a href="login.html"><button>Go To Login Page</button></a>
+  <h1 class="title is-2">You must be logged in to use this function!</h1>
+  <h2 class ="subtitle is-2">Click below to login or create an account.</h2>
+  <a href="login.html"><button class="button is-info">Go To Login Page</button></a>
 `;
 
 $(function() {
@@ -78,7 +97,7 @@ $(function() {
       const $root = $('#root');
       $root.on('click','.searchbut',loadRecs);
       document.getElementById('toLogin').innerHTML = 'Account';
-      $root.append(`<br><h2>Recently Searched Pairings<h2><div id="otherpairs"></div>`);
+      $root.append(`<br><h2 class="title is-4">Recently Searched Pairings<h2><div id="otherpairs"></div>`);
       renderOtherPairs();
     }
     else {

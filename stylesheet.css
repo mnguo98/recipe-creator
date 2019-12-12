@@ -78,7 +78,7 @@
     text-align: right;
 }
 
-.logout, .delete {
+.logout, .deletes {
     display: inline-block;
     position: relative;
     left: 86.7%;
@@ -101,11 +101,11 @@
 /* Change Password */
 .passchange {
     position: relative;
-    left: 76.7%;
+    left: 86.75%;
 }
 
 /* Recent Randoms */
-#randoms {
+#random {
     height: 200px;
     width: 50%;
     position: relative;
@@ -125,3 +125,8 @@
     font: 16px/26px Georgia, Garamond, Serif;
     overflow: auto;
 }
+
+/* .edity {
+    width: 25%;
+    size:100
+} */

@@ -7,10 +7,12 @@
         <title>Recipe Creator</title>
 
         <link href="stylesheet.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="node_modules/bulma/css/bulma.css" />
+
     </head>
     <body>
-        <div class="website">
-            <h1>Recipe Creator</h1>
+        <div class="website hero is-info">
+            <br><h1 class="title is-1 is-dark">Recipe Creator</h1><br>
         </div>
         <div class="topnav">
             <a class="mainpage" href="index.html">Home</a>
@@ -20,13 +22,13 @@
             <a class="login" href="login.html">Login</a>
         </div>
         <br>
-        <h1>Random Recipe</h1>
+        <center><h1 class="title is-2">Random Recipe</h1></center>
         <br>
-        <div class="searchbar">
+        <div class="searchbar subtitle is-5">
             <h>Can't decide what to cook?</h>
             <p>Here's a look at one of our favorite recipies!</p>
         </div>
-        <div id="root"></div>
+        <center><div id="root"></div></center>
 
         <!-- Include links to JavaScript files below -->
         <!-- TODO: Add link to jQuery here -->
@@ -35,12 +37,23 @@
         <script src="node_modules/axios/dist/axios.js"></script>
 
         <br>
-        <h2>Recent Random Recipes</h2>
-        <div id="random">
-        </div>
-        <div class="description">
-            <h1>COMP 426</h1>
-            <p>Matthew Guo, Omsai Meka, Brendan Mohr</p>
-    </div>     
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>      
+        
+
+        <center>        <h2 class = "title is-3 is-underlined">Recent Random Recipes</h2>        </center>
+
+        <center><div id="random">
+        </div></center>
+
+       <center> <br>
+        <br>
+        <div class="description hero is-info">
+            <h1 class="title is-3 is-dark">COMP 426</h1>
+            <p class ="subtitle is-4 is-dark">Matthew Guo, Omsai Meka, Brendan Mohr</p>
+        </div> </center>  
     </body>
 </html>

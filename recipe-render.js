@@ -17,18 +17,21 @@ export async function loadRec() {
         var editing = ing.replace(/,/g,'')
         inglist.push('<p>'+editing+'</p>');
       }
+      console.log(inglist);
       let randRec = '<div>'
-                    +'<h1>' + rec.recipes[0].title + '</h1>'
+                    +'<h1 class ="title is-3">' + rec.recipes[0].title + '</h1>'
                     +'<img src=' + rec.recipes[0].image + '></img>'
-                    +'<h2> Cook Time: '+rec.recipes[0].readyInMinutes+' Minutes </h2>'
-                    +'<h2> Number of Servings: '+rec.recipes[0].servings+' Portions </h2>'
-                    +'<h2> Part of these Diet(s): '+rec.recipes[0].diets+' </h2>'
-                    +'<h2> Ingredients: </h2>'
-                    +'<ul>'
+                    +'<h2 class ="title is-5"> Cook Time: '+rec.recipes[0].readyInMinutes+' Minutes </h2>'
+                    +'<h2 class ="title is-5"> Number of Servings: '+rec.recipes[0].servings+' Portions </h2>'
+                    +'<h2 class ="title is-5"> Part of these Diet(s): '+rec.recipes[0].diets+' </h2>'
+                    +'<h2 class ="title is-4"> Ingredients: </h2>'
+                    +'<ul class="subtitle is-5">'
                     +inglist
                     +'</ul>'
-                    +'<h2> Instructions: </h2>'
-                    +'<h3>'+rec.recipes[0].instructions+'</h3>'
+                    +'<br>'
+                    +'<br>'
+                    +'<h2 class ="title is-4"> Instructions: </h2>'
+                    +'<h3 class="subtitle is-5">'+rec.recipes[0].instructions+'</h3>'
                     +'</div>';
       $root.append(randRec);
       if (window.localStorage.getItem('public') === null) {
@@ -49,8 +52,8 @@ function renderRandoms() {
   if (rands === null) {
     $randoms.append(`<h5></h5>`);
   } else {
-    for (let i=0; i<rands.length; i++) {
-      $randoms.append(`<h5>${i+1}. ${rands[rands.length-i-1]}</h5>`);
+    for (let i=0; i<10; i++) {
+      $randoms.append(`<h5 class="subtitle is-5">${i+1}. ${rands[rands.length-i-1]}</h5>`);
     }
   }
 }

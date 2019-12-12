@@ -30,7 +30,7 @@ export const loadRecs=async function(event) {
 
       const result = await axios({
       method: 'get',
-      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec',
+      url: 'https://api.spoonacular.com/recipes/findByIngredients?ingredients='+finalings+'&apiKey=e1a5aa14bfd14552ad0bf4bf036797ef',
       });
       let rec = result.data;      
 
@@ -50,7 +50,7 @@ export const loadRecs=async function(event) {
       }
       const result2 = await axios({
           method: 'get',
-          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=f0fa351f88f14b7ab0e2db17c5849bec'
+          url: 'https://api.spoonacular.com/recipes/informationBulk?ids='+listofids+'&apiKey=e1a5aa14bfd14552ad0bf4bf036797ef'
         });
         let arrayofrecs = new Array();
         arrayofrecs = result2.data;
