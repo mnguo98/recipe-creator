@@ -81,7 +81,7 @@
 .logout, .delete {
     display: inline-block;
     position: relative;
-    left: 87%;
+    left: 86.7%;
 }
 
 #change {
@@ -106,6 +106,17 @@
 
 /* Recent Randoms */
 #randoms {
+    height: 200px;
+    width: 50%;
+    position: relative;
+    display: center;
+    border: 1px solid #ccc;
+    font: 16px/26px Georgia, Garamond, Serif;
+    overflow: auto;
+}
+
+/* Recent Pairings */
+#otherpairs {
     height: 200px;
     width: 50%;
     position: relative;
