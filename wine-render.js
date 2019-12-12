@@ -58,9 +58,12 @@ export const loadRecs = async function(event) {
 function renderOtherPairs() {
   const $other = $('#otherpairs');
   let pairs = JSON.parse(window.localStorage.getItem('private'));
-  console.log()
-  for (let i=0; i<pairs.length; i++) {
-    $other.append(`<h5>${i+1}. ${pairs[pairs.length-i-1]}</h5>`);
+  if (pairs === null) {
+    $other.append(`<h5></h5>`);
+  } else {
+    for (let i=0; i<pairs.length; i++) {
+      $other.append(`<h5>${i+1}. ${pairs[pairs.length-i-1]}</h5>`);
+    }
   }
 }  
 
